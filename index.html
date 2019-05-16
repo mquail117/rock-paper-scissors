@@ -7,8 +7,101 @@
 
 </body>
 <script>
-  function computerPlay {
-    
-  }
+	function getRandomInt(min, max) {
+	    min = Math.ceil(min);
+	    max = Math.floor(max);
+	    return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+	function computerPlay() {
+		random = getRandomInt(1,3)
+		let play;
+		switch(random) {
+			case 1:
+				play = "rock";
+				break;
+			case 2:
+				play = "paper";
+				break;
+			case 3:
+				play = "scissors";
+				break;
+		}
+		return play;
+	}
+	function playerPlay() {
+		let play = prompt("Enter your play.").toLowerCase();
+		if (play == "rock" || play == "paper" || play == "scissors") {
+			return play; 
+		}
+		else { 
+			alert("That is not a valid play. Please try again.");
+			playerPlay();
+		}
+	}
+	function playRound(playerSelection, computerSelection, round) {
+		if (playerSelection == computerSelection) {
+			console.log("Round " + round + " is a tie! Both players chose " + playerSelection + ".");
+			return "tie";
+		} else {
+			if (playerSelection == "rock"){
+				if (computerSelection == "scissors") {
+					console.log("You win round " + round + "! Rock crushes scissors.");
+					return "player";
+				} else {
+					console.log("You lose round " + round + "! Paper covers rock.");
+					return "computer";
+				}
+			} else if (playerSelection == "paper") {
+				if (computerSelection == "rock") {
+					console.log("You win round " + round + "! Paper covers rock.");
+					return "player";
+				}
+				else {
+					console.log("You lose round " + round + "! Scissors cut paper.");
+					return "computer";
+				}
+			} else if (playerSelection == "scissors") {
+				if (computerSelection == "paper") {
+					console.log("You win round " + round + "! Scissors cut paper.");
+					return "player";
+				}
+				else {
+					console.log("You lose round " + round + "! Rock crushes scissors.");
+					return "computer";
+				}
+			}
+		}
+
+	}
+	function game() {
+		let playerWins = 0;
+		let computerWins = 0;
+		let round = 1;
+		let playerSelection;
+		let computerSelection;
+		let result;
+		while (playerWins < 3 && computerWins < 3) {
+			playerSelection = playerPlay();
+			computerSelection = computerPlay();
+			result = playRound(playerSelection, computerSelection, round);
+			if (result == 'player') { 
+				playerWins++; 
+			}
+			else if (result == 'computer') {
+				computerWins++; 
+			}
+			else { 
+				continue; 
+			}
+			round++;
+		}
+		if (playerWins == 3) { 
+			console.log("Player wins!") 
+		}
+		else { 
+			console.log("Computer wins!") 
+		}
+	}
+	game();
 </script>
 </html>
