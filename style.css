@@ -1,0 +1,15 @@
+.center{
+    text-align:center;
+}
+.hidden {
+    display:none;
+}
+#player-score {
+    float:left;
+}
+#computer-score {
+    float:right;
+}
+.clear {
+    clear:both;
+}
